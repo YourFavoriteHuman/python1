@@ -100,15 +100,14 @@ def previousgues():
 while game_over == False:
     print(f"There are {len(word)} letters in the word. Guess a letter: ")
     print(HANGMANPICS[tries])
-    print("Word:", hiddenword)
+    print("Word:", " ".join(hiddenword))
     prevgues.sort()
-    print(" ".join(hiddenword))#temporary#temporary#temporary#temporary#temporary#temporary#temporary#temporary
     print("Previous guesses:", ", ".join(prevgues))
     print(word)#fdgilukdfhgyidfsuhisdfhgoisdfgkjlsdfhiousdfigudfhoiudsfhgdfhiguhsdflighsdfoiguhldifuhgosidfhgoisdfuhgoisdfghio
     guess = input("Letter to guess?: ")
     prevgues = list(prevgues)
     
-
+    count = -1
     if guess in word:
         for letter in word:
             
@@ -116,9 +115,11 @@ while game_over == False:
             #if count >= len(hiddenword):
                 #count = -1
                 #break
+            count += 1
             if letter == guess:
-                # count += 1
-                hiddenword[word.find(guess)] = guess
+                hiddenword[count] = guess
+            
+                '''
                 word1 = word[:word.find(guess)] + word[word.find(guess) + 1:]
                 if word1.find(guess) != -1:
                     hiddenword[word1.find(guess)] = guess
@@ -128,6 +129,8 @@ while game_over == False:
                         word3 = word[:word.find(guess)] + word[word.find(guess) + 1:]
                         if word3.find(guess) != -1:
                             hiddenword[word3.find(guess)] = guess
+                '''
+        count = -1
 
     elif guess not in word:
         tries += 1
