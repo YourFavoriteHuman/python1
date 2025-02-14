@@ -105,6 +105,7 @@ while game_over == False:
     print("Previous guesses:", ", ".join(prevgues))
     print(word)#fdgilukdfhgyidfsuhisdfhgoisdfgkjlsdfhiousdfigudfhoiudsfhgdfhiguhsdflighsdfoiguhldifuhgosidfhgoisdfuhgoisdfghio
     guess = input("Letter to guess?: ")
+    guess = guess.lower()
     prevgues = list(prevgues)
     
     count = -1
