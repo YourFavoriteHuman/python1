@@ -49,23 +49,23 @@ while True:
     clear_screen()
     aors = input("find angle or side? (a/s): ")
     if aors == 's':
-        anga = int(input("angle a: "))
-        b = int(input("b: "))
+        anga = float(input("angle a: "))
+        b = float(input("side b: "))
         # print("b:", b)
         
-        c = int(input("c: "))
+        c = float(input("side c: "))
         # print("c:", c)
 
         b2 = pow(b,2)
         c2 = pow(c,2)
 
-        r = sqrt(b2+c2-2*(b*c)*degrees(cos(anga)))
+        # r = sqrt(b2+c2-2*(b*c)*degrees(cos(anga)))
 
         print(law_of_cosines_side(b,c,anga))
         input()
     elif aors == 'a':
-        sa = int(input("side a: "))
-        sb = int(input("side b: "))
-        sc = int(input("side c: "))
+        sa = float(input("side a: "))
+        sb = float(input("side b: "))
+        sc = float(input("side c: "))
         print(law_of_cosines_angle(sa,sb,sc))
         input()

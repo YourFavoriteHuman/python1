@@ -43,25 +43,18 @@ def law_of_sines(side1, angle1, side2=None, angle2=None):
 
 while True:
     clear_screen()
-    aors = input("find angle or side? (a/s): ")
-    if aors == 's':
-        anga = int(input("angle a: "))
-        b = int(input("b: "))
-        # print("b:", b)
-        
-        c = int(input("c: "))
-        # print("c:", c)
+    s1 = int(input("side 1: "))
+    a1 = int(input("angle 1: "))
+    
+    try:
+        s2 = int(input("side 2: "))
+    except ValueError:
+        s2 = None
 
-        b2 = pow(b,2)
-        c2 = pow(c,2)
-
-        r = sqrt(b2+c2-2*(b*c)*degrees(cos(anga)))
-
-        print(law_of_cosines_side(b,c,anga))
-        input()
-    elif aors == 'a':
-        sa = int(input("side a: "))
-        sb = int(input("side b: "))
-        sc = int(input("side c: "))
-        print(law_of_cosines_angle(sa,sb,sc))
-        input()
+    try:
+        a2 = int(input("angle 2: "))
+    except ValueError:
+        a2 = None
+    
+    print(law_of_sines(s1,a1,s2,a2))
+    input()
