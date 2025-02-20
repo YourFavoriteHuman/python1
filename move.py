@@ -6,3 +6,15 @@ mouse = [2,1,1]
 input()
 clear_screen()
 '''
+
+names = [
+    "Maya Angelou",
+    "Chimamanda Ngozi Adichie",
+    "Tobias Wolff",
+    "Sherman Alexie",
+    "Aziz Ansari"
+]
+names = names.index()
+"".s
+o = [names for i in range(len(names))]
+print(o)
