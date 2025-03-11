@@ -1,13 +1,48 @@
 from Card import Card
 from Deck import Deck
+from Pile import Pile
 
 d = Deck()
 d.build()
-d.show()
+d.shuffle()
+
+player1 = Pile("Player 1 Hand")
+player1_balance = 100
 
 
+stillPlaying = True
 
+while stillPlaying:
+    player1_bet = int(input("how much do you want to bet?: "))    
+    player1_color = input("Choose red or black: ")
+    player1_color = player1_color.title()
 
+    for _ in range(5):
+        player1.add_card(d.deal())
+     
+    print("the following cards were dealt to the player:")   
+    player1.show()
+    
+
+    count = 0
+    
+    for each_card in player1.cards:
+        print(each_card.color)
+    
+    exit()        
+    if count >= 3:
+        print(f"you won since {count} cards were {player1_color}")
+        player1_balance += player1_bet
+        
+    else:
+        print(f"you lost since {count} cards were {player1_color}")
+        player1_balance -= player1_bet
+        
+    player1.remove_all()
+        
+    if player1_balance == 0:
+        stillPlaying = False
+        
 
 
 

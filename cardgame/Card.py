@@ -13,10 +13,10 @@ class Card:
         self.suit = suit     # Ex: "Hearts"
         self.value = int(value)      # Ex: 2...10, 11, 12, 13, 14
         
-        if self.suit == "Heart" or self.suit == "Diamonds":
-            self.color = "red"
+        if self.suit == "Hearts" or self.suit == "Diamonds":
+            self.color = "Red"
         else:
-            self.color = "black"
+            self.color = "Black"
         
         self.long_name = Card.NAMES[self.value] + " of " + self.suit
         
