@@ -1,7 +1,7 @@
 import Deck
 
-class Card(Deck):
-        # Class variables
+class Card:
+    # Class variables
     SUITS = ["♤", "♡", "♧", "♢"]
     SUITS2 = ["Spades", "Hearts", "Clubs", "Diamonds"]
     NAMES = [None, None, "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
@@ -10,15 +10,15 @@ class Card(Deck):
     # Constructor
     def __init__(self, suit, value):
         # Instance variables
-        self.suit = suit.title()     # Ex: "Hearts"
-        self.value = value      # Ex: 2...10, 11, 12, 13, 14
+        self.suit = suit     # Ex: "Hearts"
+        self.value = int(value)      # Ex: 2...10, 11, 12, 13, 14
         
         if self.suit == "Heart" or self.suit == "Diamonds":
             self.color = "red"
         else:
             self.color = "black"
         
-        self.long_name = Deck.NAMES[self.value] + " of " + self.suit
+        self.long_name = Card.NAMES[self.value] + " of " + self.suit
         
         if self.value == 10:
             self.name = Card.NAMES[self.value][:2] + Card.SUITS[Card.SUITS2.index[self.suit]]
@@ -29,9 +29,35 @@ class Card(Deck):
         self.front_image = self.long_name.replace(" ", "_").lower() + ".png"
     def __str__(self):
         # Output this: 4♡ K♧ 10♢
-        s = Deck.NAMES[self.value][0]
+        s = Card.NAMES[self.value][0]
+        
+    def __eq__(self, other):
+        return self.value == other.value
+    
+    def __gt__(self, other):
+        return self.value > other.value
 
+    def __lt__(self, other):
+        return self.value < other.value
+    
+    def __ge__(self, other):
+        return self.value >= other.value
+
+    def __le__(self, other):
+        return self.value <= other.value
+    
+    def __repr__(self):
+        s = f"Name: {self.name}"
+        s += f"\nLong Name: {self.long_name}"
+        s += f"\nSuit: {self.suit}"
+        s += f"\nSuit Symbol: {self.name[-1]}"
+        s += f"\nValue: {self.value}"
+        s += f"\nFront Image: {self.front_image}"
+        s += f"\nBack Image: {self.back_image}"
+        s += f"\nId: {id(self)}"
+        return s
+    
     def build(self):
-        for suit in Deck.SUITS:
+        for suit in Card.SUITS:
             pass
     
