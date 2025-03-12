@@ -1,7 +1,9 @@
 from Card import Card
 from Deck import Deck
 from Pile import Pile
-
+from tkinter import Tk, Label
+from PIL import Image, ImageTk
+'''
 d = Deck()
 d.build()
 d.shuffle()
@@ -43,13 +45,19 @@ while stillPlaying:
     if player1_balance == 0:
         stillPlaying = False
         
+'''
 
+root = Tk()
+root.title("Image example")
 
+im = Image.open("7_of_clubs.jpg")
+image = im.resize((round(im.size[0]*0.2), round(im.size[1]*0.2)))
+photo = ImageTk.PhotoImage(image)
 
+image_label = Label(root, image=photo)
+image_label.pack()
 
-
-
-
+root.mainloop()
 
 
 
