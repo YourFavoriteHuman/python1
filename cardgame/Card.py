@@ -31,6 +31,10 @@ class Card:
         # Output this: 4♡ K♧ 10♢
         s = Card.NAMES[self.value][0]
         
+    def set_hidden(self, true_or_false):
+        self = true_or_false
+        return self
+        
     def __eq__(self, other):
         return self.value == other.value
     
