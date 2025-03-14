@@ -10,6 +10,14 @@ class Deck:
         # self.cards.append( Card(2, "Hearts") )
         for suit in Card.Card.SUITS:
             for value in range(2, 15):
+                if value == 11:
+                    value = "J"
+                elif value == 12:
+                    value = "Q"
+                elif value == 13:
+                    value = "K"
+                elif value == 14:
+                    value = "A"
                 self.cards.append((str(value) + suit))
     
     def show(self):
