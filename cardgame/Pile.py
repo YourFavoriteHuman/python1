@@ -28,3 +28,7 @@ class Pile:
         for each_card in self.pile_of_cards:
             print(each_card, end=" ")
         print()
+        
+    def isgreater(self):
+        
+        return bool
