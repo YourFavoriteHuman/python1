@@ -26,14 +26,13 @@ class Card:
         self.long_name = Card.NAMES[self.value] + " of " + self.suit
 
         if self.value == 10:
-            self.name = Card.NAMES[self.value][:2] + \
-            Card.SUITS[ Card.SUITS2.index(self.suit)]
+            self.name = Card.NAMES[self.value][:2] + Card.SUITS[ Card.SUITS2.index(self.suit)]
         else:
-            self.name = Card.NAMES[self.value][0] + \
-            Card.SUITS[ Card.SUITS2.index(self.suit)]
+            self.name = Card.NAMES[self.value][0] + Card.SUITS[ Card.SUITS2.index(self.suit)]
 
         self.back_image = "back.png"
 
+        """
         # Temp variables
         front_image = self.long_name.replace(" ", "_").lower() + ".png"
         im = Image.open(f"images/{front_image}")
@@ -41,6 +40,7 @@ class Card:
         photo = ImageTk.PhotoImage(image)
 
         self.front_image = photo
+        """
 
     def __str__(self):
         return f"{self.name:>3}"

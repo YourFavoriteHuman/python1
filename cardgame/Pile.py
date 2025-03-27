@@ -35,6 +35,5 @@ class Pile:
             sum += each_card.value
         return sum
         
-    def isgreater(self):
-        
-        return bool
+    def last_played(self):
+        return self.pile_of_cards[-1]
