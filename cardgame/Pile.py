@@ -29,6 +29,12 @@ class Pile:
             print(each_card, end=" ")
         print()
         
+    def sum_of_pile(self):
+        sum = 0
+        for each_card in self.pile_of_cards:
+            sum += each_card.value
+        return sum
+        
     def isgreater(self):
         
         return bool
