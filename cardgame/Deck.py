@@ -1,6 +1,7 @@
 #from Card import Card
-import Card
+from Card import Card
 import random
+
 class Deck:
     def __init__(self):
         self.cards = [ ]
@@ -8,8 +9,9 @@ class Deck:
     def build(self):
         # Append or add 52 cards to deck
         # self.cards.append( Card(2, "Hearts") )
-        for suit in Card.Card.SUITS:
+        for suit in Card.SUITS2:
             for value in range(2, 15):
+                """
                 if value == 11:
                     value = "J"
                 elif value == 12:
@@ -18,7 +20,8 @@ class Deck:
                     value = "K"
                 elif value == 14:
                     value = "A"
-                self.cards.append((str(value) + suit))
+                """
+                self.cards.append( Card(value,suit) )
     
     def show(self):
         CARDS_PER_LINE = 13
@@ -51,4 +54,3 @@ class Deck:
         
     def return_many_cards(self, list_of_cards):
         self.cards.extend(list_of_cards)
-    

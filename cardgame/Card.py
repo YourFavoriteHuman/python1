@@ -1,6 +1,3 @@
-import Deck
-from PIL import Image, ImageTk
-
 class Card:
     # Class Variables
     SUITS = ["♤", "♡", "♧", "♢"]
@@ -66,7 +63,8 @@ class Card:
         s += f"\nSuit: {self.suit}"
         s += f"\nSuit Symbol: {self.name[-1]}"
         s += f"\nValue: {self.value}"
-        s += f"\nFront Image: {self.front_image}"
+        s += f"\nColor: {self.color}"
+        # s += f"\nFront Image: {self.front_image}"
         s += f"\nBack Image: {self.back_image}"
         s += f"\nId: {id(self)}"
         return s
