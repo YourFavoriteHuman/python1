@@ -25,7 +25,7 @@ quote = tk.Label(root, text="Nothing will work unless you do.", bg="royal blue",
 author = tk.Label(root, text="- Maya Angelo", bg="royal blue")
 
 
-button = tk.Button(command=quit, bg="royal blue", text="yarrrrrrr", cursor="hand1", )
+button = tk.Button(command=quit, bg="royal blue", text="exit", cursor="hand1", )
 textfield = tk.Text(cursor="xterm", )
 
 '''
