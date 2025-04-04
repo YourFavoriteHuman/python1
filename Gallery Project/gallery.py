@@ -16,6 +16,8 @@ root.geometry("680x1000")
 
 currentIndex = 0
 
+
+
 students = ["Jaynan Carrasquillo", "Ethan Celano", "Matheus Comandolli",
                "Camilo Contreras", "Nicolas Garcia-Macchiavello", "Amelia Gordon",
                "Hayden Green", "Philip Hanna", "Jace Nguyen", "Thien-Cat Nguyen",
@@ -122,9 +124,13 @@ person = students
 # Create widgets
 button1 = tk.Button(text="Prev", command=prev())
 button2 = tk.Button(text="Next", command=next())
+albumlist = tk.Listbox(selectmode="single")
+albumlist.insert(1, "Students")
+albumlist.insert(2, "Faculty")
 # Layout Widgets using grid
-button1.grid(row=10, column=0,)
-button2.grid(row=10, column=10,)
+button1.grid(row=2, column=1, padx=180, pady=900)
+button2.grid(row=2, column=5,)
+albumlist.grid(row=1, column=3)
 # Run the GUI loop - Needs to be last - Infinite Loop
 
 root.mainloop()
