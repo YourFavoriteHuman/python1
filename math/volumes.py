@@ -1,7 +1,7 @@
 from math import *
 
 while True:
-    shape = input("which shape do u want to find volume for?(cube, prism, cyl, pyr, cone, exit): ")
+    shape = input("which shape do u want to find volume for?(cube, prism, cyl, pyr, cone, sphere, exit): ")
 
     # Cube: Volume (V) = side³ (s³) 
     # Rectangular Prism (Cuboid): Volume (V) = length × width × height (lwh) 
@@ -11,16 +11,27 @@ while True:
     # Pyramid: Volume (V) = (1/3) × base area × height ((1/3)Bh) 
 
     if shape == "cube":
-        s = int(input("side length: "))
+        s = float(input("side length: "))
         print("volume =", pow(s, 3))
     elif shape == "prism":
-        base = int(input("area of the base: "))
+        base = float(input("area of the base: "))
+        height = float(input("height of prism: "))
+        print("volume =", (base*height))
     elif shape == "cyl":
-        pass
+        height = float(input("height of cylinder: "))
+        radius = float(input("radius of prism base: "))
+        print("volume =", (pi * pow(radius, 2) * height))
     elif shape == "pyr":
-        pass
+        base = float(input("area of the base: "))
+        height = float(input("height of pyramid: "))
+        print("volume =", ((1/3)*base*height))
     elif shape == "cone":
-        pass
+        height = float(input("height of cone: "))
+        radius = float(input("radius of cone base: "))
+        print("volume =", ((1/3) * pi * pow(radius, 2) * height))
+    elif shape == "sphere":
+        radius = float(input("radius of sphere: "))
+        print("volume =", ((4/3) * pi * pow(radius, 3)))
     elif shape == "exit":
         break
     else:
