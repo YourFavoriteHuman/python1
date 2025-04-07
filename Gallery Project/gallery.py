@@ -12,7 +12,7 @@ import requests
 
 root = tk.Tk()
 root.title("Face Flashcards")
-root.geometry("680x1000")
+root.geometry("680x1000+50+0")
 
 currentIndex = 0
 
@@ -113,7 +113,10 @@ def combo_changed(event):
     global person, currentIndex
     pass
 
-# Python Students in each period
+def handle_selection(event):
+    label1.configure( text = "Selected option: " + selected_option.get() )
+
+# Python Students in each periodvvv
 
 root.attributes('-topmost', True)
 
@@ -121,16 +124,32 @@ root.attributes('-topmost', True)
 # As needed by the code.
 person = students
 
+# frame = tk.Frame(root, height=100, width=100)
+# def change_bg():
+    # frame.config(background='red')
+    
+# button = tk.Checkbutton(frame, text="Paint",command=change_bg)
 # Create widgets
+label1 = tk.Label(root, text=" ")
 button1 = tk.Button(text="Prev", command=prev())
-button2 = tk.Button(text="Next", command=next())
-albumlist = tk.Listbox(selectmode="single")
-albumlist.insert(1, "Students")
-albumlist.insert(2, "Faculty")
+button2next = tk.Button(text="Next", command=next())
+selected_option = tk.StringVar() # Variable mirrors what the combobox is set to
+combobox = ttk.Combobox(root, textvariable=selected_option, values=['Album1','Album2'] )
+combobox.set('Album1') # Define default value
+combobox.bind("<<ComboboxSelected>>", handle_selection) # Ties function to widget
+# albumlist = tk.Listbox(selectmode="single")
+# albumlist.insert(1, "Students")
+# albumlist.insert(2, "Faculty")
 # Layout Widgets using grid
-button1.grid(row=2, column=1, padx=180, pady=900)
-button2.grid(row=2, column=5,)
-albumlist.grid(row=1, column=3)
+
+# button.grid(row=0, column=0)
+# frame.grid(row=0, column=0,)
+
+label1.grid(row=1, column=3)
+button1.grid(row=2, column=1)
+button2next.grid(row=2, column=5)
+combobox.grid(row=1, column=1, )
+# albumlist.grid(row=1, column=3)
 # Run the GUI loop - Needs to be last - Infinite Loop
 
 root.mainloop()
