@@ -112,10 +112,10 @@ def change_pic():
 def combo_changed(event):
     global person, currentIndex
     pass
-
+'''
 def handle_selection(event):
     label1.configure( text = "Selected option: " + selected_option.get() )
-
+'''
 # Python Students in each periodvvv
 
 root.attributes('-topmost', True)
@@ -127,14 +127,21 @@ person = students
 # frame = tk.Frame(root, height=100, width=100)
 # def change_bg():
     # frame.config(background='red')
-    
+    # pass
+student = students[5]
+student_fixed = student.replace(" ", "_")
+image_url = f"https://fullerm-bmchs.github.io/students/2024-2025/{student_fixed}.jpeg"
+image_jpg = Image.open(requests.get(image_url, stream = True).raw)    
+image_tkinter = ImageTk.PhotoImage(image_jpg)
 # button = tk.Checkbutton(frame, text="Paint",command=change_bg)
 # Create widgets
-label1 = tk.Label(root, text=" ")
+
+image_label = tk.Label(root, image = image_tkinter)
+label1 = name = tk.Label(root,text = f"{student}",font=("Arial", 20, "bold"))
 button1 = tk.Button(text="Prev", command=prev())
 button2next = tk.Button(text="Next", command=next())
-selected_option = tk.StringVar() # Variable mirrors what the combobox is set to
-combobox = ttk.Combobox(root, textvariable=selected_option, values=['Album1','Album2'] )
+# selected_option = tk.StringVar() | Variable mirrors what the combobox is set to
+combobox = ttk.Combobox(root, values=['Album1','Album2'] )
 combobox.set('Album1') # Define default value
 combobox.bind("<<ComboboxSelected>>", handle_selection) # Ties function to widget
 # albumlist = tk.Listbox(selectmode="single")
@@ -144,11 +151,11 @@ combobox.bind("<<ComboboxSelected>>", handle_selection) # Ties function to widge
 
 # button.grid(row=0, column=0)
 # frame.grid(row=0, column=0,)
-
-label1.grid(row=1, column=3)
-button1.grid(row=2, column=1)
-button2next.grid(row=2, column=5)
-combobox.grid(row=1, column=1, )
+image_label.grid(row=0, column=2)
+label1.grid(row=1, column=2, columnspan=2, padx=5, pady=10)
+button1.grid(row=3, column=2, padx=0, pady=10, sticky="w")
+button2next.grid(row=3, column=2,padx =5, pady=10, sticky="e")
+combobox.grid(row=2, column=2, columnspan=2,padx=5, pady=10)
 # albumlist.grid(row=1, column=3)
 # Run the GUI loop - Needs to be last - Infinite Loop
 
