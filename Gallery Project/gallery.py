@@ -90,32 +90,91 @@ faculty = ["Thomas Doyle","Nick Pavgouzas","Vincent Bello",
 	"Troy Wilson","Susan Wofford","Andre Wright",
 	"Raymond Wynne","Dee Zoellick"]
 
+student = students[currentIndex]
+faculty1 = faculty[currentIndex]
+student_fixed = student.replace(" ", "_")
+faculty_fixed = faculty1.replace(" ", "_")
+person = student
+image_url = f"https://fullerm-bmchs.github.io/students/2024-2025/{student_fixed}.jpeg"
+image_jpg = Image.open(requests.get(image_url, stream = True).raw)    
+image_tkinter = ImageTk.PhotoImage(image_jpg)
+
 def prev():
     # You can change the names of the variables
     # Any variables outside a function that need to be changed inside a function
     # will require the GLOBAL keyword as below
     global currentIndex
     currentIndex -= 1
+    if combobox.get() == "Students":
+        if currentIndex == -len(students):
+            currentIndex = 0
+    elif combobox.get() == "Faculty":
+        if currentIndex == -len(faculty):
+            currentIndex = 0 
+    print(currentIndex)
+    change_pic()
+
     
 def next():
     # You can change the names of the variables
     global currentIndex
     currentIndex += 1
-    if currentIndex == len(students):
-        currentIndex = 0
+    if combobox.get() == "Students":
+        if currentIndex == len(students):
+            currentIndex = 0
+    elif combobox.get() == "Faculty":
+        if currentIndex == len(faculty):
+            currentIndex = 0
+    print(currentIndex)
+    change_pic()
+    
+    
 
 def change_pic():
-    # You can change the names of the variables
     global currentIndex, image_tkinter
-    pass
+    person_fixed = person[currentIndex].replace(" ", "_")
+    person1 = person[currentIndex]
+    # You can change the names of the variables
+    if combobox.get() == "Faculty":
+        image_url = f"https://fullerm-bmchs.github.io/students/2024-2025/faculty/{person_fixed}.jpeg"
+        print("chamged ")
+    elif combobox.get() == "Students":
+        image_url = f"https://fullerm-bmchs.github.io/students/2024-2025/{person_fixed}.jpeg"
+    
+    # student = students[currentIndex]
+    
+    print(f"{person_fixed=}")
+    image_jpg = Image.open(requests.get(image_url, stream = True).raw)    
+    image_resized = image_jpg.resize((320, 400))
+    image_tkinter = ImageTk.PhotoImage(image_resized)
+    image_label = tk.Label(root, image = image_tkinter)
+    image_label.grid(row=0, column=2)
+    name = tk.Label(root,text = f"{person1}",font=("Arial", 20, "bold"))
+    name.configure()
+    label1 = name
+    # label1.grid_forget()
+    label1.grid(row=1, column=2, columnspan=2, padx=5, pady=10)
+    
+    
 
 def combo_changed(event):
     global person, currentIndex
-    pass
+    if combobox.get() == "Faculty":
+        currentIndex = 0
+        person = faculty
+        print("CHANGED")
+
+    elif combobox.get() == "Students":
+        currentIndex = 0
+        person = student
+        change_pic()
+    change_pic()
+    
+    
 '''
 def handle_selection(event):
     label1.configure( text = "Selected option: " + selected_option.get() )
-'''
+''' 
 # Python Students in each periodvvv
 
 root.attributes('-topmost', True)
@@ -128,22 +187,24 @@ person = students
 # def change_bg():
     # frame.config(background='red')
     # pass
-student = students[5]
+'''
+student = students[currentIndex]
 student_fixed = student.replace(" ", "_")
 image_url = f"https://fullerm-bmchs.github.io/students/2024-2025/{student_fixed}.jpeg"
 image_jpg = Image.open(requests.get(image_url, stream = True).raw)    
 image_tkinter = ImageTk.PhotoImage(image_jpg)
+'''
 # button = tk.Checkbutton(frame, text="Paint",command=change_bg)
 # Create widgets
 
 image_label = tk.Label(root, image = image_tkinter)
 label1 = name = tk.Label(root,text = f"{student}",font=("Arial", 20, "bold"))
-button1 = tk.Button(text="Prev", command=prev())
-button2next = tk.Button(text="Next", command=next())
-# selected_option = tk.StringVar() | Variable mirrors what the combobox is set to
-combobox = ttk.Combobox(root, values=['Album1','Album2'] )
-combobox.set('Album1') # Define default value
-combobox.bind("<<ComboboxSelected>>", handle_selection) # Ties function to widget
+button1 = tk.Button(text="Prev", command=prev)
+button2next = tk.Button(text="Next", command=next)
+selected_option = tk.StringVar() # Variable mirrors what the combobox is set to
+combobox = ttk.Combobox(root, values=['Students','Faculty'])
+combobox.set('Students') # Define default value
+combobox.bind("<<ComboboxSelected>>", combo_changed) # Ties function to widget
 # albumlist = tk.Listbox(selectmode="single")
 # albumlist.insert(1, "Students")
 # albumlist.insert(2, "Faculty")
