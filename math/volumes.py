@@ -1,7 +1,17 @@
 from math import *
+from os import system, name
+
+def clear_screen():
+    # For Microsoft Windows
+    if name == 'nt':
+        _ = system('cls')
+    
+    # For Mac and Linux (here, os.name is 'posix')
+    else:
+        _ = system('clear')
 
 while True:
-    shape = input("which shape do u want to find volume for?(cube, prism, cyl, pyr, cone, sphere, exit): ")
+    shape = input("which shape do u want to find volume for?(cube, prism, cyl, pyr, cone, sphere, exit, clear): ")
 
     # Cube: Volume (V) = side³ (s³) 
     # Rectangular Prism (Cuboid): Volume (V) = length × width × height (lwh) 
@@ -34,6 +44,8 @@ while True:
         print("volume =", ((4/3) * pi * pow(radius, 3)))
     elif shape == "exit":
         break
+    elif shape == "clear":
+        clear_screen()
     else:
         print("invalid shape")
     
