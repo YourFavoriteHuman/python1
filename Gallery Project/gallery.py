@@ -12,7 +12,8 @@ import requests
 
 root = tk.Tk()
 root.title("Face Flashcards")
-root.geometry("680x1000+50+0")
+root.geometry("325x540+50+0")
+root.resizable(False, False)
 
 currentIndex = 0
 
@@ -99,6 +100,7 @@ image_url = f"https://fullerm-bmchs.github.io/students/2024-2025/{student_fixed}
 image_jpg = Image.open(requests.get(image_url, stream = True).raw)    
 image_tkinter = ImageTk.PhotoImage(image_jpg)
 
+
 def prev():
     # You can change the names of the variables
     # Any variables outside a function that need to be changed inside a function
@@ -128,8 +130,16 @@ def next():
     print(currentIndex)
     change_pic()
     
+def first():
+    global currentIndex
+    currentIndex = 0
+    change_pic()
     
-
+def last():
+    global currentIndex
+    currentIndex = -1    
+    change_pic()
+    
 def change_pic():
     global currentIndex, image_tkinter
     person_fixed = person[currentIndex].replace(" ", "_")
@@ -147,13 +157,16 @@ def change_pic():
     image_jpg = Image.open(requests.get(image_url, stream = True).raw)    
     image_resized = image_jpg.resize((320, 400))
     image_tkinter = ImageTk.PhotoImage(image_resized)
-    image_label = tk.Label(root, image = image_tkinter)
+    #image_label = tk.Label(root, image = image_tkinter)
     image_label.grid(row=0, column=2)
-    name = tk.Label(root,text = f"{person1}",font=("Arial", 20, "bold"))
-    name.configure()
-    label1 = name
-    # label1.grid_forget()
-    label1.grid(row=1, column=2, columnspan=2, padx=5, pady=10)
+    #name = tk.Label(root,text = f"{person1}",font=("Arial", 20, "bold"))
+    print(person[currentIndex])
+    image_label.configure(image = image_tkinter)
+    name.configure(text = f"{person[currentIndex]}",font=("Arial", 20, "bold"))
+    name.update()
+    # name.grid_forget()
+    name.grid(row=1, column=2, columnspan=2, padx=5, pady=10)
+
     
     
 
@@ -173,11 +186,12 @@ def combo_changed(event):
     
 '''
 def handle_selection(event):
-    label1.configure( text = "Selected option: " + selected_option.get() )
+    name.configure( text = "Selected option: " + selected_option.get() )
 ''' 
 # Python Students in each periodvvv
 
 root.attributes('-topmost', True)
+
 
 # This variable will change to point to a different set of pictures (Album)
 # As needed by the code.
@@ -198,11 +212,14 @@ image_tkinter = ImageTk.PhotoImage(image_jpg)
 # Create widgets
 
 image_label = tk.Label(root, image = image_tkinter)
-label1 = name = tk.Label(root,text = f"{student}",font=("Arial", 20, "bold"))
+name = tk.Label(root,text = f"{person[currentIndex]}",font=("Arial", 20, "bold"))
 button1 = tk.Button(text="Prev", command=prev)
 button2next = tk.Button(text="Next", command=next)
+button3end = tk.Button(text="Last", command=last)
+button4beginning = tk.Button(text="First", command=first)
+button5quit = tk.Button(text="Quit", command=quit)
 selected_option = tk.StringVar() # Variable mirrors what the combobox is set to
-combobox = ttk.Combobox(root, values=['Students','Faculty'])
+combobox = ttk.Combobox(root, values=['Students','Faculty'], state="readonly")
 combobox.set('Students') # Define default value
 combobox.bind("<<ComboboxSelected>>", combo_changed) # Ties function to widget
 # albumlist = tk.Listbox(selectmode="single")
@@ -213,12 +230,16 @@ combobox.bind("<<ComboboxSelected>>", combo_changed) # Ties function to widget
 # button.grid(row=0, column=0)
 # frame.grid(row=0, column=0,)
 image_label.grid(row=0, column=2)
-label1.grid(row=1, column=2, columnspan=2, padx=5, pady=10)
+name.grid(row=1, column=2, columnspan=2, padx=5, pady=10)
 button1.grid(row=3, column=2, padx=0, pady=10, sticky="w")
 button2next.grid(row=3, column=2,padx =5, pady=10, sticky="e")
+button3end.grid(row=2, column=2,padx =5, pady=10, sticky="e")
+button4beginning.grid(row=2, column=2, padx=0, pady=10, sticky="w")
+button5quit.grid(row=3, column=2, padx=0, pady=10, sticky="s")
 combobox.grid(row=2, column=2, columnspan=2,padx=5, pady=10)
 # albumlist.grid(row=1, column=3)
 # Run the GUI loop - Needs to be last - Infinite Loop
+
 
 root.mainloop()
 
