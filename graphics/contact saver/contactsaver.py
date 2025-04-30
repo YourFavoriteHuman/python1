@@ -24,7 +24,8 @@ def save_data():
     filename = "data.csv"
     with open(filename, 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerows(username_str.get())        
+        print(valid_users)
+        writer.writerows(valid_users)
 def load_data():
     with open('data.csv', 'r') as file:
         csv_reader = csv.reader(file)
@@ -32,15 +33,16 @@ def load_data():
             valid_users.append(row)
     print(valid_users)
     
-# save_data()
-# load_data()
+
+load_data()
 
 def create_pushed():
-    valid_users.append( [username_str.get(), email_str.get(), phone_str.get()] )
+    valid_users.append([str(username_str.get()), str(email_str.get()), str(phone_str.get())])
     # textArea.insert(tk.END, f"{username_str.get(), email_str.get(), phone_str.get()}\n")
-    textArea.insert(tk.END, f"{valid_users}\n")
-    valid_users.append( [username_str.get(), email_str.get(), phone_str.get()] )
-    print(valid_users)
+    textArea.insert(tk.END, f"{username_str.get()}, ")
+    textArea.insert(tk.END, f"{email_str.get()}, ")
+    textArea.insert(tk.END, f"{phone_str.get()}\n")
+    # textArea.insert(tk.END, f"{",".join(valid_users)}\n")
     username.delete(0, tk.END)
     email.delete(0, tk.END)
     phone.delete(0, tk.END)
@@ -60,6 +62,7 @@ phone_label = tk.Label(root, text="Phone number:")
 phone = tk.Entry(root, textvariable=phone_str, width=40)
 
 login_button = tk.Button(root, text="Add Contact", command=create_pushed)
+save_button = tk.Button(root, text="Save", command=save_data)
 
 textArea = tk.Text(root, width=70, height=12)
 textArea_label = tk.Label(root, text="All Contacts:")
@@ -71,7 +74,7 @@ textArea_label = tk.Label(root, text="All Contacts:")
 
 #textArea.tag_configure("center", justify='center')
 #textArea.tag_add("center", "1.0", "end") # Center the text
-textArea.config(state=tk.DISABLED) # Make the text area read-only
+#textArea.config(state=tk.DISABLED) # Make the text area read-only
 
 
 
@@ -88,6 +91,7 @@ email.grid(pady=5, row=3, column=0)
 phone_label.grid(pady=5, row=4, column=0, sticky="w")
 phone.grid(pady=5, row=5, column=0)
 login_button.grid(pady=5, row=6, column=0)
+save_button.grid(pady=5, row=6, column=2, columnspan=2)
 
 # Run main loop
 root.mainloop()
