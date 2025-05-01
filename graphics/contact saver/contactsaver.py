@@ -31,10 +31,15 @@ def load_data():
         csv_reader = csv.reader(file)
         for row in csv_reader:
             valid_users.append(row)
+    for i in range(len(valid_users)):
+        textArea.insert(tk.END, f"{", ".join(valid_users[i])}\n")
     print(valid_users)
     
 
-load_data()
+def reset():
+    textArea.delete('1.0', tk.END)
+    valid_users.clear()
+    save_data()
 
 def create_pushed():
     valid_users.append([str(username_str.get()), str(email_str.get()), str(phone_str.get())])
@@ -42,7 +47,8 @@ def create_pushed():
     textArea.insert(tk.END, f"{username_str.get()}, ")
     textArea.insert(tk.END, f"{email_str.get()}, ")
     textArea.insert(tk.END, f"{phone_str.get()}\n")
-    # textArea.insert(tk.END, f"{",".join(valid_users)}\n")
+    # for i in range(len(valid_users)):
+        # textArea.insert(tk.END, f"{", ".join(valid_users[i])}\n")
     username.delete(0, tk.END)
     email.delete(0, tk.END)
     phone.delete(0, tk.END)
@@ -63,11 +69,12 @@ phone = tk.Entry(root, textvariable=phone_str, width=40)
 
 login_button = tk.Button(root, text="Add Contact", command=create_pushed)
 save_button = tk.Button(root, text="Save", command=save_data)
+reset_button = tk.Button(root, text="Reset", command=reset,)
 
 textArea = tk.Text(root, width=70, height=12)
 textArea_label = tk.Label(root, text="All Contacts:")
 # textArea.insert(tk.END, f"{username_str.get()}\t{email_str.get()}\t{phone_str.get()}\n")
-
+load_data()
 
 #textArea.insert(tk.END, "Name\tEmail\tPhone\n")
 #textArea.insert(tk.END, "---------------------\n")
@@ -91,7 +98,8 @@ email.grid(pady=5, row=3, column=0)
 phone_label.grid(pady=5, row=4, column=0, sticky="w")
 phone.grid(pady=5, row=5, column=0)
 login_button.grid(pady=5, row=6, column=0)
-save_button.grid(pady=5, row=6, column=2, columnspan=2)
+save_button.grid(pady=5, row=6, column=2, sticky="e")
+reset_button.grid(pady=5, row=6, column=3, sticky="w")
 
 # Run main loop
 root.mainloop()
